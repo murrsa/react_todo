@@ -1,24 +1,23 @@
-
-import './App.css';
-import { useState} from "react";
-import { Task } from "./Task";
-
+import "./App.css";
+import { useState } from "react";
+import { Task } from "./Task"
 
 function App() {
-  const [todoList, setTodoList] = useState([])
-  const [newTask, setNewTask]  = useState("");
+  const [todoList, setTodoList] = useState([]);
+  const [newTask, setNewTask] = useState("");
+
 
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
- 
+
   const addTask = () => {
     const task = {
-      id: todoList.length  === 0 ? 1 : todoList[todoList.length - 1].id +1,
-      taskname :newTask,
+      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      taskName: newTask,
       completed: false,
     };
-    setTodoList(task.taskName !== ""? [...todoList, task] : todoList);
+    setTodoList([...todoList, task]);
   };
 
   const deleteTask = (id) => {
@@ -29,33 +28,30 @@ function App() {
     setTodoList(
       todoList.map((task) => {
         if (task.id === id) {
-          return {...task, completed: true};
-        }else {
+          return { ...task, completed: true };
+        } else {
           return task;
         }
       })
     );
   };
- 
+
   return (
-    
     <div className="App">
-      <div className='addTask'>
-        
+      <div className="addTask">
         <input onChange={handleChange} />
-        <button onClick={addTask}> Add Task</button>
+        <button onClick={addTask}> Add Task </button>
       </div>
-      <div className='list'>
+      <div className="list">
         {todoList.map((task) => {
           return (
             <Task
-              taskName ={task.taskName}
+              taskName={task.taskName}
               id={task.id}
               completed={task.completed}
               deleteTask={deleteTask}
               completeTask={completeTask}
-        
-           />
+            />
           );
         })}
       </div>
@@ -63,25 +59,4 @@ function App() {
   );
 }
 
-  
-  export default App;
-//   return (
-//     <div className="App">
-//       <User name="Samantha" age={27} email="smurra15@mail.ccsf.edu" />
-//       <User name="Crypto" age={30} email="taejoon@crypto.com" />
-//     </div>
-//   );
-// }
-
-
-// const User = (props) => {
-//   return (
-// <div>
-//   <h1>{props.name}</h1>
-//   <h1>{props.age}</h1>
-//   <h1>{props.email}</h1>
-//   </div>
-//   );
-// };
-
-
+export default App;
